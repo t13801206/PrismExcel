@@ -22,7 +22,8 @@ namespace PrismExcel
         {
             containerRegistry.RegisterSingleton<IMessageService, MessageService>();
 
-            containerRegistry.RegisterForNavigation<Views.MainTable>();
+            containerRegistry.RegisterForNavigation<MainTable>();
+            containerRegistry.RegisterDialog<FilterDialog, ViewModels.FilterDialogViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
