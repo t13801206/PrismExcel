@@ -1,19 +1,14 @@
 ﻿using Prism.Mvvm;
+using Prism.Regions;
+using PrismExcel.Core;
 
 namespace PrismExcel.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        private string _title = "Prism Application";
-        public string Title
+        public MainWindowViewModel(IRegionManager regionManager)
         {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
-
-        public MainWindowViewModel()
-        {
-
+            regionManager.RegisterViewWithRegion(RegionNames.MainTableRegion, typeof(Views.MainTable));
         }
     }
 }
