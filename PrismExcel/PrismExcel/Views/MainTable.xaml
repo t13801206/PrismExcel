@@ -6,5 +6,10 @@
              Width="500" Height="500">
     <Grid Background="Beige">
         <Label Content="here is main table"/>
+        <DataGrid
+            Height="400"
+            Margin="20"
+            AutoGenerateColumns="True"
+            ItemsSource="{Binding Contacts}" />
     </Grid>
 </UserControl>
