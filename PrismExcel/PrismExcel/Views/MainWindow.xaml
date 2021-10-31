@@ -7,8 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:viewmodels="clr-namespace:PrismExcel.ViewModels"
-    Width="525"
-    Height="850"
+    Title="DataGrid like Excel (t13801206 - 2021.10)"
+    Width="500"
+    Height="500"
     d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
