@@ -15,7 +15,7 @@
         <StackPanel Orientation="Horizontal">
             <Label Content="検索" Foreground="Gray" />
             <TextBox
-                x:Name="filterText"
+                Text="{Binding FilterText.Value, UpdateSourceTrigger=PropertyChanged}"
                 Width="50"
                 Margin="5" />
         </StackPanel>

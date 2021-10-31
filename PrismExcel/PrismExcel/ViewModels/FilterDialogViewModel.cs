@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using PrismExcel.Services.Interfaces;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Data;
+using System.Diagnostics;
 
 namespace PrismExcel.ViewModels
 {
@@ -14,19 +17,36 @@ namespace PrismExcel.ViewModels
 
         public ReactiveCommand CancelCommand { get; } = new ReactiveCommand();
 
-        public List<IFilterItem> ItemSource { get; set; } = new List<IFilterItem>();
+        public ObservableCollection<IFilterItem> ItemSource { get; set; } = new ObservableCollection<IFilterItem>();
+
+        public ReactiveProperty<string> FilterText { get; set; } = new ReactiveProperty<string>("");
+
+        private readonly ICollectionView _view;
 
         public FilterDialogViewModel()
         {
-            OkCommand.Subscribe(() => 
+            OkCommand.Subscribe(() =>
             {
                 RequestClose.Invoke(new DialogResult(ButtonResult.OK));
             });
 
-            CancelCommand.Subscribe(() => 
+            CancelCommand.Subscribe(() =>
             {
                 RequestClose.Invoke(new DialogResult(ButtonResult.Cancel));
             });
+
+            _view = CollectionViewSource.GetDefaultView(ItemSource);
+
+            _view.Filter = x =>
+            {
+                if (FilterText.Value == "")
+                    return true;
+
+                var filterItem = x as Models.FilterItem;
+                return filterItem.Content.Contains(FilterText.Value);
+            };
+
+            FilterText.Subscribe(_ => _view.Refresh());
         }
 
         public string Title => "列のフィルタリング";
